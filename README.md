@@ -1,2 +1,2 @@
 # bai-python-spider
-study python spider
+- [x] Learning python spider
