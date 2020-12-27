@@ -1,5 +1,7 @@
 # auto_msg_wx_sender
 This project is to send messages by wechat automatically to other users.
+# But, Tecent has **forbidden web wechat**!!!
+- [ ] Learning... how to use PC wechat by python
 # Install Instruction
 - Using MacOS
 - Using pip to install python library
