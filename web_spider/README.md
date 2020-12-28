@@ -10,3 +10,12 @@ sudo python3 -m pip install requests
 sudo python3 -m pip install beautifulsoup4
 sudo python3 -m pip install lxml
 ```
+## Don't forget to fake headers
+```python
+headers = {
+        # 假装自己是浏览器
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36',
+    }
+    try:
+        response = requests.get(url,headers=headers)
+```
