@@ -12,6 +12,7 @@ sudo python3 -m pip install requests
 sudo python3 -m pip install beautifulsoup4
 sudo python3 -m pip install lxml
 ```
+- some files need to set privilege of read & write for specific user!!! 
 ## Don't forget to fake headers
 ```python
 headers = {
