@@ -29,6 +29,8 @@ class ProgressBar(object):
             self.status = status or self.fin_status  
         print(self.__get_info(), end=end_str, )  
 
+def downloader_status():
+    	pass
 
 if __name__ == '__main__':
 	#url = 'http://www.demongan.com/source/game/二十四点.zip'
