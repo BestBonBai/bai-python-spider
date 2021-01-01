@@ -1,5 +1,5 @@
 #-*- coding: UTF-8 -*-
-import requests  
+# import requests  
 from contextlib import closing
 
 class ProgressBar(object):  
@@ -29,12 +29,14 @@ class ProgressBar(object):
             self.status = status or self.fin_status  
         print(self.__get_info(), end=end_str, )  
 
+
+
 def downloader_status():
     	print('*' * 100)
 	print('\t\t\t\tWelcome to use downloader!!!')
 	print('Author: BestBonBai\nGithub: https://www.bestbonbai.github.io')
 	print('*' * 100)
-	return None
+
 
 
 def downloader_url(url, dir_url):

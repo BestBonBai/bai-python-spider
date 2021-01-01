@@ -5,14 +5,15 @@ from bs4 import BeautifulSoup
 import xlwt
 import os
 # import my class
-import web_spider.downloader as downloader
+import sys
+# sys.path.append('需要作为模块引入的路径')
+sys.path.append("./")
+# import downloader
+from web_spider import downloader
 # create a new dir to store images
 dir_url = './image_panzi/'
 os.makedirs(f'{dir_url}', exist_ok=True)
 
-
-# show downloader menu
-downloader.downloader_status()
 
 def request_url(url):
     headers = {
@@ -76,8 +77,10 @@ def main(page):
 
 
 if __name__ == '__main__':
+    # show downloader menu
+    # downloader.downloader_status()
     print('crawling PangziTV: ')
-    for i in range(0, 1):
-        main(i)
+    # for i in range(0, 1):
+        # main(i)
 
 
