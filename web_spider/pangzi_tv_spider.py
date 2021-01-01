@@ -4,9 +4,15 @@ import requests
 from bs4 import BeautifulSoup
 import xlwt
 import os
+# import my class
+import web_spider.downloader as downloader
 # create a new dir to store images
-os.makedirs('./image_pangzi/', exist_ok=True)
+dir_url = './image_panzi/'
+os.makedirs(f'{dir_url}', exist_ok=True)
 
+
+# show downloader menu
+downloader.downloader_status()
 
 def request_url(url):
     headers = {
@@ -24,11 +30,12 @@ def request_url(url):
 
 
 # download image method
-def request_download(image_url,image_index):
-    r = requests.get(image_url)
-    with open(f'./image_pangzi/{image_index}.jpg', 'wb') as f:
-        f.write(r.content)   
+# def request_download(image_url,image_index):
+#     r = requests.get(image_url)
+#     with open(f'./image_pangzi/{image_index}.jpg', 'wb') as f:
+#         f.write(r.content)   
 
+    
 
 temp_index = 0
 
@@ -50,6 +57,9 @@ def test_print(soup):
         # set full image url to download        
         image_url = image_pre + item_img
         # request_download(image_url, temp_index)
+        # show downloader progress bar and download sth
+        downloader.downloader_url(image_url, dir_url)
+        
 
                    
 
