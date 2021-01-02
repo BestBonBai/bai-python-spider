@@ -1,6 +1,6 @@
 #-*- coding: UTF-8 -*-
 # import requests  
-from contextlib import closing
+# from contextlib import closing
 
 class ProgressBar(object):  
     def __init__(self, title, count=0.0, run_status=None, fin_status=None, total=100.0, unit='', sep='/', chunk_size=1.0):  
@@ -30,36 +30,6 @@ class ProgressBar(object):
         print(self.__get_info(), end=end_str, )  
 
 
-
-def downloader_status():
-    	print('*' * 100)
-	print('\t\t\t\tWelcome to use downloader!!!')
-	print('Author: BestBonBai\nGithub: https://www.bestbonbai.github.io')
-	print('*' * 100)
-
-
-
-def downloader_url(url, dir_url):
-    	process_url = url
-	filename = process_url.split('/')[-1]
-	with closing(requests.get(url, stream=True)) as response:  
-		chunk_size = 1024  
-		content_size = int(response.headers['content-length'])  
-		if response.status_code == 200:
-			print('file size:%0.2f KB' % (content_size / chunk_size))
-			progress = ProgressBar("%s Progressing" % filename
-			            , total = content_size  
-			            , unit = "KB"  
-			            , chunk_size = chunk_size  
-			            , run_status = "downloading"  
-			            , fin_status = "success download")  
-
-			with open(f'./{dir_url}/{filename}', "wb") as file:  
-			        for data in response.iter_content(chunk_size=chunk_size):  
-			            file.write(data)  
-			            progress.refresh(count=len(data))  
-		else:
-			print('url exception')	
 
 
 # you can use this method to type url to download
