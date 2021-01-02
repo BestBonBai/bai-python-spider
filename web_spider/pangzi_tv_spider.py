@@ -107,7 +107,7 @@ def main(page, type):
     # 国产剧 https://www.pangzitv.com/vod-list-id-12-pg-1-order--by--class--year--letter--area--lang-.html
     # 热门点击 https://www.pangzitv.com/vod-list-id-12-pg-1-order--by-hits-class-0-year-0-letter--area--lang-.html
     if(type == '0'):
-        url = 'https://www.pangzitv.com/vod-list-id-12-pg-' + str(page) + '-order--by-hits-class-0-year-0-letter--area--lang-.html'
+        url = 'https://www.pangzitv.com/vod-list-id-12-pg-' + str(page) + '-order--by--class--year--letter--area--lang-.html'
         print('国产剧 download...')
     if(type == '1'):
         url = 'https://www.pangzitv.com/vod-list-id-12-pg-' + str(page) + '-order--by-hits-class-0-year-0-letter--area--lang-.html'
