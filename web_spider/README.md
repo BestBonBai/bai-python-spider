@@ -4,6 +4,10 @@ The project is to learn how to crawl info by python
 - [x] douban top movies list spider
     - [ ] doing some different saving function
 - [ ] panzi top movies download
+    - [x] finish download image and link and movies list
+    - [x] create a markdown file to show the movies list and links
+    - [x] save images of movies
+    - [ ] trying to download movies
 - [ ] downloader : a smart download tool to show progess
 ## Install instruction for Mac
 - using code `sudo python3 -m` before pip codes to install requests lib in python 3 instead of default python 2 in Mac
@@ -12,7 +16,9 @@ sudo python3 -m pip install requests
 sudo python3 -m pip install beautifulsoup4
 sudo python3 -m pip install lxml
 ```
-- **Attention**: some files need to set privilege of read & write for specific user!!! 
+- **Attention**: 
+    - [x] some files need to set privilege of read & write for specific user!!! 
+    - [x] some **bugs** are `tab & space` issues in vscode
 ## Don't forget to fake headers
 ```python
 headers = {

@@ -9,8 +9,8 @@ import os
 import sys
 # sys.path.append('需要作为模块引入的路径')
 # sys.path.append("./")
-from contextlib import closing
-import downloader
+
+
 
 # create a new dir to store images
 dir_url = './image_panzi/'
@@ -26,7 +26,7 @@ def request_url(url):
         response = requests.get(url,headers=headers)
         # status 200 means connected success
         if response.status_code == 200:
-            print('finish spider, show result: ')
+            print('showing result: ')
             return response.text
     except requests.RequestException:
         return None
@@ -51,28 +51,59 @@ def test_print(soup):
 
     for item in list:
         item_name = item.find(class_='name').string
-        item_img = item.find('a').find('img').get('src')
+        item_img_url = item.find('a').find('img').get('src')
+        item_link = item.find(class_='name').get('href')
         # use f to change int type into string
         temp_index = temp_index + 1
-        print(f'Num {temp_index}' + ' | '+ item_name + ' | ' + item_img )
+        print(f'Num {temp_index}' + ' | '+ item_name + ' | ' + item_img_url + ' | ' + item_link )
         # set full image url to download        
-        image_url = image_pre + item_img
+        image_url = image_pre + item_img_url
+        movie_link = image_pre + item_link
+
         # request_download(image_url, temp_index)
         # show downloader progress bar and download sth
-        downloader_url(item_img, dir_url)
+        downloader_url(temp_index, image_url, item_img_url, item_name, dir_url, movie_link)
 
+
+
+# save info in txt file
+def save_info_txt(temp_index, item_name, location_url, movie_link):
+    my_file_name = 'my_info_file.md'
+    # add info in the back of the file, if not exist, create new file
+    my_info_file = open(my_file_name, 'a')
+    total_info = '### ' + str(temp_index) + ': [' + item_name + '](' + movie_link +')\n' + '![](' + location_url + ')\n'
+    my_info_file.write(total_info)
+    my_info_file.close()
 
 
 # downloader method
-def downloader_url(download_url, dir_url):
-    pass
+def downloader_url(temp_index, image_url, item_img_url, item_name, dir_url, movie_link):
+    download_url = image_url
+    filename = item_img_url.split('/')[-1]
+    
+    # save images
+    my_location = f'{dir_url}/{filename}'
+    # save info in text
+    location_url = f'{dir_url}/{filename}' # need to change for markdown image is this format
+    save_info_txt(temp_index, item_name, location_url, movie_link)
+
+    # such image files (no txt file) use b to binary store
+    r = requests.get(download_url)
+    with open(my_location, 'wb') as f:
+        f.write(r.content)     
 
 
 
 
-def main(page):
+def main(page, type):
     # 国产剧 https://www.pangzitv.com/vod-list-id-12-pg-1-order--by--class--year--letter--area--lang-.html
-    url = 'https://www.pangzitv.com/vod-list-id-12-pg-' + str(page) + '-order--by--class--year--letter--area--lang-.html'
+    # 热门点击 https://www.pangzitv.com/vod-list-id-12-pg-1-order--by-hits-class-0-year-0-letter--area--lang-.html
+    if(type == '0'):
+        url = 'https://www.pangzitv.com/vod-list-id-12-pg-' + str(page) + '-order--by-hits-class-0-year-0-letter--area--lang-.html'
+        print('国产剧 download...')
+    if(type == '1'):
+        url = 'https://www.pangzitv.com/vod-list-id-12-pg-' + str(page) + '-order--by-hits-class-0-year-0-letter--area--lang-.html'
+        print('热播剧 download...')
     html = request_url(url)
     soup = BeautifulSoup(html, 'lxml')
     test_print(soup)
@@ -81,19 +112,21 @@ def main(page):
 def downloader_menu():
     # show downloader menu
     print('*' * 100)
-    print('\t\t\t\tWelcome to use downloader!!!')
+    print('\t\t\t\tWelcome to use Spider!!!')
     print('Author: BestBonBai\nGithub: https://www.bestbonbai.github.io')
     print('...Crawling PangziTV...')
     print('*' * 100)
+    type = input('Please choose type to download:\n 0: 国产剧, 1: 热门点击\n')
+    return type
 
 
 
 
 if __name__ == '__main__':
     # show downloader menu
-    downloader_menu()
-    
-    # for i in range(0, 1):
-        # main(i)
+    type = downloader_menu()
+    # main(1,type)
+    for i in range(0, 1):
+        main(i,type)
 
 
