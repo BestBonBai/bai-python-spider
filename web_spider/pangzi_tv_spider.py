@@ -9,6 +9,7 @@ import os
 import sys
 # sys.path.append('需要作为模块引入的路径')
 # sys.path.append("./")
+import re # for regex
 
 
 
@@ -39,6 +40,7 @@ def request_url(url):
 #         f.write(r.content)   
 
 temp_index = 0
+CHECK_REGX = '^http' # check correct regex expression
 
 def test_print(soup):
     # find list info from panzitv.com, according to analyse site's html
@@ -56,8 +58,13 @@ def test_print(soup):
         # use f to change int type into string
         temp_index = temp_index + 1
         print(f'Num {temp_index}' + ' | '+ item_name + ' | ' + item_img_url + ' | ' + item_link )
-        # set full image url to download        
-        image_url = image_pre + item_img_url
+        # regex check 
+        match_url = re.match(r'^http', item_img_url, re.I)
+        if(match_url):
+            image_url = item_img_url
+        else:
+            # set full image url to download        
+            image_url = image_pre + item_img_url
         movie_link = image_pre + item_link
 
         # request_download(image_url, temp_index)
@@ -78,6 +85,7 @@ def save_info_txt(temp_index, item_name, location_url, movie_link):
 
 # downloader method
 def downloader_url(temp_index, image_url, item_img_url, item_name, dir_url, movie_link):
+    
     download_url = image_url
     filename = item_img_url.split('/')[-1]
     
