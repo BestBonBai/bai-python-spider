@@ -45,6 +45,21 @@ headers = {
 - [x] 8. `fix` some `bugs` during running time
 - [x] 9. add `progress bar` method to show download status
 
+## running instruction
+- make sure `pangzi_tv_spider_v2.py` in correct dir
+- run `pangzi_tv_spider_v2.py`
+- **Don't interrupt** it when running, it will automatic create specified dir and files.
+
+show some codes below:
+```bash
+# some cmd to run spider
+python3 pangzi_tv_spider_v2.py
+# following the interactive code 
+
+```
+
+- if download, please make sure input valid url
+
 ## Import all packages by python
 ```python
 import requests
