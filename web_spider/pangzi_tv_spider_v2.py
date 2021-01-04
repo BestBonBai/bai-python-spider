@@ -213,7 +213,9 @@ def get_m3u8_url_decode(soup_my_url):
     list = soup_my_url.find(class_='clear pl-play js-addDanmu').find_all('script')
     # print(list[0])
     m3u8_file_name = soup_my_url.find('h3').string
-    print('File name: ' + m3u8_file_name)
+    # fix bug, replace all space (such as xxx ddd to xxx-ddd) by '-'
+    m3u8_file_name = re.sub(r'\s', '-', m3u8_file_name)
+    print('M3U8 File name: ' + m3u8_file_name)
     # create a dir
     os.makedirs(f'{dir_download_url}/{m3u8_file_name}', exist_ok=True)
     file_path = f'{dir_download_url}/{m3u8_file_name}'
